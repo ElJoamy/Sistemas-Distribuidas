@@ -1,0 +1,198 @@
+C:\Windows\System32\drivers\etc //ARCHIVO PARA AÑADIR HOSTS
+SERVIDOR PROXY MAQUINA 3
+    1  /etc/apt/sources.list.d/
+    2  nano /etc/apt/sources.list.d/
+    3  nano /etc/apt/sources.list
+    4  apt-get update
+    5  apt-get upgrade
+    6  ap install aptitude
+    7  apt install aptitude
+    8  aptitude install net-tools
+    9  ifconfig
+   10  aptitude install nfs-common
+   11  mkdir -p /mnt/cliente1
+   12  mount 192.168.91.150:/mnt/nfs /mnt/cliente1
+   13  nano /etc/fstab
+   14  ping 192.168.91.150
+   15  nano /etc/fstab
+   16  mount -t nfs 192.168.91.150:/mnt/nfs /mnt/cliente1/
+   17  ls -l /mnt/cliente1/
+   18  ifconfig
+   19  apt install nginx
+   20  nano /etc/nginx/conf.d/reverse-proxy.conf
+   21  nano /etc/nginx/conf.d/reverse-proxy.conf
+   22  nginx -t
+   23  nano /etc/nginx/conf.d/reverse-proxy.conf
+   24  nginx -t
+   25  cp /etc/nginx/conf.d/reverse-proxy.conf /etc/nginx/conf.d/reverse-proxy2.conf
+   26  cp /etc/nginx/conf.d/reverse-proxy.conf /etc/nginx/conf.d/reverse-proxy3.conf
+   27  cp /etc/nginx/conf.d/reverse-proxy.conf /etc/nginx/conf.d/reverse-proxy4.conf
+   28  nano /etc/nginx/conf.d/reverse-proxy.conf
+   29  nano /etc/nginx/conf.d/reverse-proxy2.conf
+   30  nano /etc/nginx/conf.d/reverse-proxy3.conf
+   31  nano /etc/nginx/conf.d/reverse-proxy4.conf
+   32  nginx -t
+   33  nano /etc/nginx/conf.d/reverse-proxy.conf
+   34  nano /etc/nginx/conf.d/reverse-proxy.conf
+   35  nginx -t
+   36  nano /etc/nginx/nginx.conf
+   37  ln -s /etc/nginx/conf.d/reverse-proxy.conf /etc/nginx/sites-enabled/
+   38  ln -s /etc/nginx/conf.d/reverse-proxy2.conf /etc/nginx/sites-enabled/
+   39  ln -s /etc/nginx/conf.d/reverse-proxy3.conf /etc/nginx/sites-enabled/
+   40  ln -s /etc/nginx/conf.d/reverse-proxy4.conf /etc/nginx/sites-enabled/
+   41  ls /etc/nginx/sites-enabled/
+   42  /etc/init.d/nginx restart
+   43  nano /etc/nginx/conf.d/reverse-proxy2.conf
+   44  /etc/init.d/nginx restart
+   45  history
+----------------------------------------------------------------------
+ARCHIVO /etc/nginx/conf.d/reverse-proxy.conf
+----------------------------------------------------------------------
+server {
+    listen 80;
+    server_name ngnx.com;
+
+    location / {
+        proxy_pass http://192.168.91.150:80;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+-----------------------------------------------------------------------
+
+
+SERVIDOR APACHE MAQUINA 2
+   
+  109  mkdir /var/www/practicaapache.com
+  110  mkdir /var/www/apache.com
+  111  chmod -R 755 /var/www/practicaapache.com/
+  112  chmod -R 755 /var/www/apache.com/
+  113  nano -c /var/www/apache.com/index.html
+  114  nano -c /var/www/practicaapache.com/index.html
+  115  ls -l sites-available
+  116  cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/apache.com.conf
+  117  nano -e /etc/apache2/sites-available/apache.com.conf
+  118  nano -e /etc/apache2/sites-available/server.com.conf
+  119  cp /etc/apache2/sites-available/server.com.conf /etc/apache2/sites-available/apache.com.conf
+  120  nano -e /etc/apache2/sites-available/server.com.conf
+  121  nano -e /etc/apache2/sites-available/apache.com.conf
+  122  cp /etc/apache2/sites-available/server.com.conf /etc/apache2/sites-available/practicaapache.com.conf
+  123  nano -e /etc/apache2/sites-available/practicaapache.com.conf
+  124  nano -e /etc/apache2/sites-available/practicaapache.com.conf
+  125  nano -e /etc/apache2/sites-available/apache.com.conf
+  126  a2ensite apache.com.conf
+  127  a2ensite practicaapache.com.conf
+  128  nano -c /etc/apache2/ports.conf
+  129  /etc/init.d/apache2 restart
+  130  nano -c /var/www/server.com/index.html
+  131  nano -e /etc/apache2/sites-available/server.com.conf
+  132  /etc/init.d/apache2 restart
+  133  history
+
+
+
+
+
+SERVIDOR NGINX MAQUINA 1
+  
+  106  nano /var/www/academico.com/index.html
+  107  cp /etc/nginx/sites-available/sistemas.com /etc/nginx/sites-available/academico.com
+  108  nano -c /etc/nginx/sites-available/academico.com
+  109  ls -s /etc/nginx/sites-available/academico.com /etc/nginx/sites-enabled/
+  110  ls -l /etc/nginx/sites-enabled/
+  111  ln -s /etc/nginx/sites-available/academico.com /etc/nginx/sites-enabled/
+  112  ls -l /etc/nginx/sites-enabled/
+  113  /etc/init.d/nginx restart
+  114  aptitude install apache2-utils
+  115  htpasswd -c /etc/nginx/pass admin
+  116  /etc/init.d/nginx restart
+  117  nano /etc/nginx/sites-available/academico.com
+  118  /etc/init.d/nginx restart
+  119  aptitude install net-tools
+  120  ifconfig
+  121  aptitude install nfs-kernel-server
+  122  systemctl start nfs-server
+  123  systemctl enable nfs-server
+  124  systemctl status nfs-server
+  125  mkdir /mnt/nfs
+  126  touch /mnt/nfs/archivoprueba.txt
+  127  cat /etc/exports
+  128  nano /etc/exports
+  129  exports -a
+  130  exports -a
+  131  aptitude install exports
+  132  exports -a
+  133  export -a
+  134  /etc/init.d/nfs-kernel-server restart
+  135  mkdir /var/www/nginxdata.com
+  136  mkdir /var/www/nginx.com
+  137  nano /var/www/nginxdata.com/index.html
+  138  nano /var/www/nginx.com/index.html
+  139  chmod 755 /var/www/nginxdata.com/
+  140  chmod 755 /var/www/nginx.com/
+  141  cp /etc/nginx/sites-available/sistemas.com /etc/nginx/sites-available/nginx.com
+  142  cp /etc/nginx/sites-available/sistemas.com /etc/nginx/sites-available/nginxdata.com
+  143  nano /etc/nginx/sites-available/nginxdata.com
+  144  nano /etc/nginx/sites-available/nginx.com
+  145  ls -s /etc/nginx/sites-available/nginx.com /etc/nginx/sites-enabled/
+  146  ls -s /etc/nginx/sites-available/nginxdata.com /etc/nginx/sites-enabled/
+  147  /etc/init.d/nginx restart
+  148  /etc/init.d/nginx restart
+  149  ifconfig
+  150  ls -s /etc/nginx/sites-available/nginxdata.com /etc/nginx/sites-enabled/
+  151  ls -s /etc/nginx/sites-available/nginx.com /etc/nginx/sites-enabled/
+  152  ls -l /etc/nginx/sites-enabled/
+  153  ls -s /etc/nginx/sites-available/nginx.com /etc/nginx/sites-enabled/
+  154  ls -l /etc/nginx/sites-enabled/
+  155  nano /etc/nginx/sites-available/nginx.com
+  156  nano /etc/nginx/sites-available/nginxdata.com
+  157  ls -s /etc/nginx/sites-available/nginx.com /etc/nginx/sites-enabled/
+  158  ls -l /etc/nginx/sites-enabled/
+  159  /etc/init.d/nginx restart
+  160  ls -l /etc/nginx/sites-enabled/
+  161  ls -s /etc/nginx/sites-available/nginx.com /etc/nginx/sites-enabled/
+  162  ls -l /etc/nginx/sites-enabled/
+  163  nano -c /etc/nginx/sites-available/nginxdata.com
+  164  ls -s /etc/nginx/sites-available/nginx.com /etc/nginx/sites-enabled/
+  165  ls -l /etc/nginx/sites-enabled/
+  166  /etc/init.d/nginx restart
+  167  ls -l /etc/nginx/sites-enabled/
+  168  history
+  169   nano -c /etc/nginx/sites-available/nginx
+  170   nano -c /etc/nginx/sites-available/nginx.com
+  171   nano -c /etc/nginx/sites-available/nginxdata.com
+  172  ls -s /etc/nginx/sites-available/nginx.com /etc/nginx/sites-enabled/
+  173  ls -l /etc/nginx/sites-enabled/
+  174  /etc/init.d/nginx restart
+  175  ls -s /etc/nginx/sites-available/nginx.com /etc/nginx/sites-enabled/
+  176  ls -s /etc/nginx/sites-available/nginx.com /etc/nginx/sites-enabled/
+  177  ls -l /etc/nginx/sites-enabled/
+  178  ln -s /etc/nginx/sites-available/nginx.com /etc/nginx/sites-enabled/
+  179  /etc/init.d/nginx restart
+  180  ls -l /etc/nginx/sites-enabled/
+  181  ln -s /etc/nginx/sites-available/nginxdata.com /etc/nginx/sites-enabled/
+  182  /etc/init.d/nginx restart
+  183  nano /etc/nginx/sites-available/nginx.com
+  184  nano /var/www/nginx.com/index.html
+  185  nano /etc/nginx/sites-available/nginx.com
+  186  /etc/init.d/nginx restart
+  187  nano /etc/nginx/sites-available/nginx.com
+  188  /etc/init.d/nginx restart
+  189  mkdir /var/www/ngnx.com
+  190  cp /var/www/nginx.com/index.html /var/www/ngnx.com/index.html
+  191  cp /etc/nginx/sites-available/nginx.com /etc/nginx/sites-available/ngnx.com
+  192  nano /etc/nginx/sites-available/ngnx.com
+  193  ln -s /etc/nginx/sites-available/ngnxdata.com /etc/nginx/sites-enabled/
+  194  /etc/init.d/nginx restart
+  195  nano /etc/nginx/sites-available/ngnx.com
+  196  ln -s /etc/nginx/sites-available/ngnx.com /etc/nginx/sites-enabled/
+  197  /etc/init.d/nginx restart
+  198  systemctl status nginx.service
+  199  cat /etc/nginx/sites-enabled/
+  200  ls /etc/nginx/sites-enabled/
+  201  rm /etc/nginx/sites-enabled/ngnxdata.com
+  202  /etc/init.d/nginx restart
+  203  history
