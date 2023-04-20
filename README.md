@@ -1,3 +1,11 @@
+# SIstemas Distribuidos
+
+    ## Si se necesita conceptos basicos revisar el archivo conceptos_basicos.md
+
+    ## Si se necesita saber comandos basicos de linux revisar adminSistem.md
+
+    ## Dentro del archivo adminSistem.md se encuentra los comandos basicos de linux, comandos de cifrado, apache, nginx, reverse proxy, proxmox, cluster, xamba, ftp, proxy, sarg, dns, truenas    
+
 ## particionado de discos
     nos vamos manual:
         empzamosprimero por:
