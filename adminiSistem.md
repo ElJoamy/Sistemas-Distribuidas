@@ -931,6 +931,9 @@ para cambiar los permisos de others usamos el comando:
     - aptitude install bind9 // para instalar el servidor dns
     - aptitude install bind9utils // para instalar las utilidades de bind9
     - aptitude install dnsutils // para instalar las utilidades de dns
+    - dpkg -l | grep bind9 // para ver si esta instalado bind9
+    - systemctl status bind9 // para ver el estado del servicio bind9
+    - ls -l /etc/bind // para ver los archivos de configuracion de bind9
     - nano -c /etc/bind/named.conf.local // para editar el archivo de configuracion
     - declaramos la zona directa
         zone "juas.com" { 
@@ -938,7 +941,7 @@ para cambiar los permisos de others usamos el comando:
                 file "/var/lib/bind/juas.com.zone";
         };
     - y ahora en el mismo declaramos la zona indirecta
-        zone "207.168.192.in-addr.arpa" { 
+        zone "207.168.192.in-addr.arpa" {
             type master;
             file "/var/lib/bind/207.168.192.zone";
         };
@@ -964,7 +967,7 @@ para cambiar los permisos de others usamos el comando:
                 2022113001 //fecha de modificacion
                 1H // tiempo de refresco
                 30M // tiempo de reintentos
-                1W // tiempo de expiracion
+                1W // tiempo de expiracion 
                 86400 // tiempo de vida de la cache
         ) 
         @       IN      NS      adminSistem.juas.com. // nombre del servidor dns
@@ -974,8 +977,11 @@ para cambiar los permisos de others usamos el comando:
     - nano -c /var/lib/bind/207.168.192.zone // para editar el archivo de configuracion de la zona indirecta
     - borramos las de abajo y dejamos de esta manera 
         @       IN      NS      adminSistem.juas.com.
-        100     IN      PTR     adminSIstem.juas.com.
+        100     IN      PTR     adminSIstem.juas.com. //donde 100 es el ultimo octeto de la ip del servidor dns ptr es para puntero de la ip
     - /etc/init.d/named restart // para reiniciar el servicio de dns
+    - netstat -antp | grep named // para ver si esta corriendo el servicio de dns
+    - named-checkzone juas.com /var/lib/bind/juas.com.zone // para verificar la zona directa
+    - named-checkzone 207.168.192.in-addr.arpa /var/lib/bind/207.168.192.zone // para verificar la zona indirecta
     - dig @127.0.0.1 SOA juas.com // para ver la zona directa
     - dig @127.0.0.1 A www.juas.com // para ver la zona directa
     - para saber que esta bien nos debe aparecer 
@@ -995,6 +1001,24 @@ para cambiar los permisos de others usamos el comando:
     - /etc/init.d/named restart // para reiniciar el servicio de dns
     - /etc/init.d/networking restart // para reiniciar el servicio de networking
     - y hacemos ping a google donde deberiamos tener respuesta de ping exitoso
+
+    ## ahora digamos que tenemos en otra maquina nuestra pagina juas.com, como apuntamos a la maquina que tiene el dns
+    - nano -c /etc/bind/juas.com.zone // para editar el archivo de configuracion de la zona directa
+    - y ponemos de esta manera
+        @       IN      SOA     adminSistem.juas.com. root.adminSistem.juas.com. (
+                2022113001 //fecha de modificacion
+                1H // tiempo de refresco
+                30M // tiempo de reintentos
+                1W // tiempo de expiracion
+                86400 // tiempo de vida de la cache
+        ) 
+        @       IN      NS      adminSistem.juas.com.
+        adminSistem.juas.com.   IN      A   192.168.207.100
+        maquina2.juas.com.   IN      A  192.168.207.101
+        www     IN      CNAME   maquina2.juas.com.
+    - /etc/init.d/named restart // para reiniciar el servicio de dns
+
+
 
 ## Ahora haremos un dns scundario
     - nano -c /var/lib/bind/juas.com.zone // para editar el archivo de configuracion de la zona directa

@@ -251,3 +251,30 @@
     - la llave publica es la que se usa para cifrar y la privada para descifrar, y funciona de la siguiente manera:
         - el que cifra usa la llave publica del que descifra
         - el que descifra usa la llave privada del que cifra
+
+## que es DNS?
+    - DNS es el sistema de nombres de dominio que se utiliza para traducir los nombres de dominio en direcciones IP. DNS es el sistema de nombres de dominio que se utiliza para traducir los nombres de dominio en direcciones IP. 
+    - como funciona?
+        - El cliente envia una peticion al servidor DNS para resolver un nombre de dominio. El servidor DNS resuelve el nombre de dominio y devuelve la direccion IP del servidor. El cliente envia una peticion al servidor DNS para resolver un nombre de dominio. El servidor DNS resuelve el nombre de dominio y devuelve la direccion IP del servidor. 
+    - Como funcionan las consultas recursivas?
+        - Consulta recursiva
+            - En una consulta recursiva, el servidor DNS que recibe la solicitud se encarga de buscar la respuesta para el cliente. Si el servidor no tiene la respuesta en su caché, iniciará una búsqueda en el servidor DNS siguiente en la jerarquía de DNS hasta que se encuentre la respuesta. Esto significa que el servidor consultado seguirá buscando y preguntando a otros servidores hasta encontrar la respuesta o hasta que llegue al servidor autoritativo para el dominio en cuestión. Una vez que se encuentra la respuesta, el servidor DNS original la devuelve al cliente que hizo la solicitud. Las consultas recursivas son útiles en situaciones en las que el cliente no conoce el servidor que tiene la información deseada y requiere la ayuda de otros servidores DNS para encontrarla.
+
+        - Consulta iterativa
+            - Las consultas iterativas son otro método utilizado en el sistema de nombres de dominio (DNS) para obtener información de un servidor de nombres de dominio. En una consulta iterativa, el servidor DNS consultado proporciona una respuesta con la información solicitada o una referencia a otro servidor que pueda proporcionarla. El cliente debe realizar consultas adicionales para obtener la información completa.
+
+            En otras palabras, cuando se realiza una consulta iterativa, el servidor DNS consultado no resuelve directamente la consulta, sino que proporciona una respuesta parcial que indica al cliente qué servidor DNS puede tener la información completa. El cliente luego hace otra consulta al servidor indicado en la respuesta, y el proceso se repite hasta que se obtiene la información completa.
+    
+    - Como funcionan los reenviadores?
+        - Un reenviador es un servidor DNS que se utiliza para reenviar consultas a otros servidores DNS. 
+        - Los reenviadores (forwarders en inglés) son servidores DNS configurados para enviar consultas a otro servidor DNS en lugar de buscar la respuesta en su propia caché o zona de autoridad. Cuando un servidor DNS recibe una consulta que no puede responder, consulta a uno o más reenviadores para encontrar la respuesta. Los reenviadores se utilizan para mejorar la eficiencia de las consultas DNS y reducir la carga en los servidores raíz y de TLD. Cuando se utiliza un reenviador, el servidor DNS envía la consulta al reenviador y espera a que el reenviador responda con la respuesta o un mensaje de error si no puede responder la consulta.
+
+    - Registros de Recursos
+        Tipo de registro        Descripcion
+                A                   Resuelve un nombre de host en una direcion IP
+                PTR                 Resuelven una direccion IP en un nombre de host
+                SOA                 El primer rtegistro en cualquier archivo de zona
+                SRV                 Resuelve nopmbres de servidores que proporcionan servicios
+                NS                  Identifica el servidor DNS para cada zona
+                MX                  El servidor de correo
+                CNAME               rESUELVE UN NOMBRE DE HOST EN OTRO NOMBRE DE HOST
