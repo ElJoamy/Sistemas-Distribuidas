@@ -1,0 +1,94 @@
+28  mkfs.ext4 /dev/sdb1
+   29  aptitude search cryptsetup
+   30  aptitude install cryptsetup
+   31  cryptsetup luksFormat /dev/sdb1
+   32  blkid
+   33  cryptsetup luksDump /dev/sdb1
+   34  cryptsetup luksAddKey /dev/sdb1
+   35  cryptsetup luksDump /dev/sdb1
+   36  history
+   37  blkid
+   38  blkid
+   39  ls /etc/crypt
+   40  ls /etc/crypta
+   41  ls /etc/cry*
+   42  blkid
+   43  cat /etc/crypttab
+   44  nano -c  /etc/crypttab
+   45  cat /etc/crypttab
+   46  nano -c  /etc/crypttab
+   47  cat /etc/crypttab
+   48  cryptsetup luksOpen /dev/sdb1 sdbsis
+   49  ls -l /dev/mapper/
+   50  mkfs.ext4 /dev/mapper/sdbsis
+   51  mkdir /mnt/cifrado1
+   52  mount /dev/mapper/sdbsis /mnt/cifrado1/
+   53  ls -l /mnt/cifrado1/
+   54  lsblk
+   55  history
+-----------------------------------------------------------------------------------------
+EL MIO
+    1  ip addr
+    2  aptitude install net-tools
+    3  apt-get udate
+    4  apt-get update
+    5  apt-get upgrade
+    6  lsblk
+    7  nano /etc/
+    8  nano /etc/apt/sources.list
+    9  apt-get update
+   10  apt-get upgrade
+   11  apt install aptitude
+   12  aptitude install net-tools
+   13  fdisk -l
+   14  lsblk
+   15  fdisk /dev/sda
+   16  lsblk
+   17  mkfs.ext4 /dev/sda1
+   18  mkfs.ext4 /dev/sda2
+   19  mkdir /mnt/primero
+   20  mkdir /mnt/segundo
+   21  mount /dev/sda1 /mnt/primero
+   22  mount /dev/sda2 /mnt/segundo
+   23  lsblk
+   24  nano /etc/fstab
+   25  fdisk /dev/sda
+   26  nano /etc/fstab
+   27  lsblk
+   28  cat /etc/fstab
+   29  fdisk -l
+   30  lsblk
+   31  fdisk -l
+   32  cat /etc/fstab
+   33  history
+   34  ifconfig
+   35  apt install openssh-client
+   36  lsblk
+   37  fdisk /dev/sde
+   38  mkfs.ext4 /dev/sde1
+   39  lsblk
+   40  apt install ssh
+   41  apt install cryptsetup
+   42  cryptsetup luksFormat /dev/sde1
+   43  lsblk
+   44  cryptsetup luksDump /dev/sde1
+   45  cryptsetup luksAddKey /dev/sde1
+   46  blkid
+   47  ls /etc/crypt
+   48  ls /etc/cryttab
+   49  cat /etc/crypttab
+   50  nano -c /etc/crypttab
+   51  nano -c /etc/crypttab
+   52  cat /etc/crypttab
+   53  cryptsetup luksOpen /dev/sde1 sdesis
+   54  ls /dev/mapper/
+   55  ls -l /dev/mapper/
+   56  mkfs.ext4 /dev/mapper/sdesis
+   57  mkdir /mnt/cifrado1
+   58  mount /dev/mapper/sdesis /mnt/cifrado1/
+   59  ls -l /mnt/cifrado1/
+   60  lsblk
+   61  history
+   62  nano -c /etc/fstab
+   63  telinit 6
+   64  history

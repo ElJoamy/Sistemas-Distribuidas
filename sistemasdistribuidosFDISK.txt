@@ -1,0 +1,33 @@
+  1  ip addr
+    2  aptitude install net-tools
+    3  apt-get udate
+    4  apt-get update
+    5  apt-get upgrade
+    6  lsblk
+    7  nano /etc/
+    8  nano /etc/apt/sources.list
+    9  apt-get update
+   10  apt-get upgrade
+   11  apt install aptitude
+   12  aptitude install net-tools
+   13  fdisk -l
+   14  lsblk 
+   15  fdisk /dev/sda
+   16  lsblk 
+   17  mkfs.ext4 /dev/sda1
+   18  mkfs.ext4 /dev/sda2
+   19  mkdir /mnt/primero
+   20  mkdir /mnt/segundo
+   21  mount /dev/sda1 /mnt/primero
+   22  mount /dev/sda2 /mnt/segundo
+   23  lsblk 
+   24  nano /etc/fstab 
+   25  fdisk /dev/sda
+   26  nano /etc/fstab 
+   27  lsblk 
+   28  cat /etc/fstab 
+   29  fdisk -l
+   30  lsblk 
+   31  fdisk -l
+   32  cat /etc/fstab 
+   33  history
