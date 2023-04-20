@@ -80,3 +80,61 @@
         - finalizamos 
         - le ponemos si
         
+## Cifrados 
+    - creamos un directorio /home/cifrado
+    - nos vamos a la carpeta cd /home/cifrado
+    - touch archivo1
+    - touch archivo2
+    - touch archivo3
+    - cp /etc/shadow archivo1
+    - cp /etc/passwd archivo2
+    - cp /var/log/syslog archivo3
+    - ls
+    - md5sum archivo1 // md5sum es para ver el hash del archivo 
+    - md5sum archivo2
+    - md5sum archivo3
+    - cat /etc/passwd > /home/cifrado/password.txt
+    - gpg --symmetric archivo1 // esto es para cifrar un archivo donde --symmetric es para cifrar un archivo
+    - gpg -c archivo2 // esto es para cifrar un archivo donde -c es para cifrar un archivo
+    - gpg -c --cipher-algo AES256 archivo3 // esto es para cifrar un archivo donde -c es para cifrar un archivo y --cipher-algo es para escoger el algoritmo de cifrado AES256
+    - gpg -c --cipher-algo CAMELLIA128 password.txt
+    - rm archivo1
+    - rm archivo2
+    - rm archivo3
+    - rm password.txt
+    - ahora mandamos por scp los archivos cifrados al servidor2
+    - scp archivo1.gpg root@192.168.207.101:/home/destinocifrado
+
+    
+
+## generar claves
+    - gpg --full-generate-key
+    - 1
+    - 1024
+    - 2y
+    - s
+    - ponemos nombre y apellido: joseph meneses
+    - ponemos el correo: joamysalguero1@gmail.com
+    - ponemos comentario: llave para sistemas distribuidos
+    - V
+    - ponemos la contraseña: admin123
+    - gpg -a --export joamysalguero1@gmail.com > joseph.gpg.asc
+    - le ponemos todos los permisos: chmod 777 joseph.gpg.asc
+    - ahora mandamos el archivo por scp al servidor2
+    - gpg --import joseph.gpg.asc
+    - cp /etc/passwd joseph_passwd
+    - gpg -a -r (direccion del otro) --encrypt joseph_passwd
+    - gpg joseph_passwd.asc
+
+
+- otros comandos de cifrado son:
+    - gpg
+    - 3des
+    - aes
+    - blowfish
+    - aes192
+    - aes256
+    - twofish
+    - camellia128
+
+    

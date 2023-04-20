@@ -197,3 +197,57 @@
         - Almacenamiento
 ## Que es shadow?
     Shadow es un sistema de archivos que contiene informacion sobre las contrasenas de los usuarios del sistema.
+
+## Que son los sistemas sistemas distribuidos?
+    Un sistema distribuido es un sistema que se compone de varios componentes que se ejecutan en diferentes computadoras conectadas por una red. Los sistemas distribuidos se utilizan para resolver problemas que no se pueden resolver con un solo sistema.
+
+    - Los sistemas distribuidos ecesitande unsoportedecomunicaciones. Este servicio de comunicacionesdeb ser fiable y con unrendimiento acptable. Ademas enlos sistemas distribuidos aparecen losproblemas clasicosdelos sistemas concurrentes:recursos compartidos,sincronizacion Elementosde unsistema distribuido
+
+    - Un sistema distribuido se define comounacoleccionde computadorasautonomos conectadosporunaredy conelsoftware distribuido adecuado para que el sistma sea visto por los usuarios como una unica entidad capaz de resolver problemas complejos.
+
+    ## Caracteristicas de los sistemas distribuidos
+        - Transparencia
+        - Escalabilidad
+        - Fiabilidad y tolerancia a fallos
+        - Seguridad
+        - Interoperabilidad
+    
+## Tipos de sistemas distribuidos
+    - son 5:
+        - Sistemas de archivos distribuidos
+        - Sistemas de informacion distribuidos
+        - Sistemas de bases de datos distribuidos
+        - Sistemas de comunicaciones distribuidos
+        - Sistemas de computacion distribuida
+
+## Servidor cliente
+    - Codigo movil
+    - Agente movil
+    - computadores en red
+    - Clientes ligeros
+
+## Que es el thin client?
+    - Un cliente ligero es un dispositivo que se conecta a un servidor para ejecutar aplicaciones. Los clientes ligeros se utilizan para reducir el costo de los dispositivos de los usuarios finales. Su aspecto es similar al de un dispositivo de escritorio tradicional, pero no tienen un disco duro o una unidad de CD-ROM. En su lugar, los clientes ligeros se conectan a un servidor para ejecutar aplicaciones. Los clientes ligeros se utilizan para reducir el costo de los dispositivos de los usuarios finales. Su aspecto es similar al de un dispositivo de escritorio tradicional, pero no tienen un disco duro o una unidad de CD-ROM. En su lugar, los clientes ligeros se conectan a un servidor para ejecutar aplicaciones.
+
+## Modelo de interaccion
+    - Moddelo sincrono
+        - Los modelos sincronos son aquellos en los que el cliente y el servidor se comunican de forma sincrona. El cliente envia una peticion y el servidor responde a la peticion. El cliente y el servidor se comunican de forma sincrona. El cliente envia una peticion y el servidor responde a la peticion. El cliente y el servidor se comunican de forma sincrona. 
+        
+    - Modelo asincrono
+        - Los modelos asincronos son aquellos en los que el cliente y el servidor se comunican de forma asincrona. El cliente envia una peticion y el servidor responde a la peticion. El cliente y el servidor se comunican de forma asincrona. El cliente envia una peticion y el servidor responde a la peticion. El cliente y el servidor se comunican de forma asincrona.
+
+## Modelos de fallos
+    - Tipo de fallo segun la entidad
+        - Fallo de proceso
+        - Fallos de comunicacion
+    - Tipo de fallo segun el problema
+        - Fallos por omision
+        - No se consigue realiazar una accion que se deberia poder hacer
+        - O no se consigue en el tiempoen el que se deberia poder hacer 
+    - Fallos arbitrarios
+        - Errores de cualquier tipo, fuera del esquema de mensaes
+    
+## como funciona una llave asimetrica?
+    - la llave publica es la que se usa para cifrar y la privada para descifrar, y funciona de la siguiente manera:
+        - el que cifra usa la llave publica del que descifra
+        - el que descifra usa la llave privada del que cifra

@@ -404,11 +404,17 @@ para cambiar los permisos de others usamos el comando:
     como trabaja el hosting?
         el hosting es un servicio que permite a las personas o empresas tener un sitio web en internet
     - aptitude install apache2 // para instalar apache2
-    - si queremos desis
+    - para ver el usuario y grupo que ejecuta apache2
+        - ps aux | grep apache2 // donde ps aux muestra los procesos en ejecucion y grep busca el proceso que queremos
+    - para ver que puerto esta trabajando con apache
+        - netstat -tulpn | grep apache2 // donde netstat muestra las conexiones de red y grep busca el proceso que queremos donde t es tcp, -u es udp, -l es escuchando y -p es el numero del proceso
+    - dpkg -s apache2 // para ver si esta instalado
+    - nano /etc/apache2/ports.conf
     - ls /var/www/html // para ver los archivos de apache2
     - mkdir /var/www/sistemas.com/index.html // para crear un directorio
+    - chmod -R 755 /var/www/sistemas.com // para dar permisos al directorio donde -R es recursivo
     - nano /var/www/sistemas.com/index.html // para crear un archivo html
-    -   <!DOCTYPE html>
+        <!DOCTYPE html>
         <html>
         <head>
             <meta charset="utf-8">
@@ -422,6 +428,11 @@ para cambiar los permisos de others usamos el comando:
     - ls -l sites-enabled // para ver los sitios habilitados
     - cp sites-available/000-default.conf /etc/apache2/sites-available/sistemas.com.conf // para copiar el archivo de configuracion
     - nano /etc/apache2/sites-available/sistemas.com.conf // para editar el archivo de configuracion
+    - dentro de ello editamos lo siguiente:
+        - ServerName sistemas.com
+        - DocumentRoot /var/www/sistemas.com
+        - ErrorLog ${APACHE_LOG_DIR}/sistemas.com.error.log
+        - CustomLog ${APACHE_LOG_DIR}/sistemas.com.access.log combined
     - a2ensite sistemas.com.conf // para habilitar el sitio
     - /etc/init.d/apache2 restart // para reiniciar apache2
     - a2dissite 000-default.conf // para deshabilitar el sitio
@@ -446,7 +457,7 @@ para cambiar los permisos de others usamos el comando:
     CustomLog ${APACHE_LOG_DIR}/sistemas.com.access.log combined
     <Directory "/var/www/sistemas.com">
         Options -Indexes
-        AllowOverride none
+        AllowOverride None
         Order allow,deny
         Allow from all
         AuthName "Acceso restringido"
@@ -455,10 +466,19 @@ para cambiar los permisos de others usamos el comando:
         Require valid-user
     </Directory>
 
-    - htpasswd -c /var/archivosrestringidos/ restringidos // para crear un archivo de usuarios y contraseñas
-    
+    - htpasswd -c /var/archivosrestringidos/restringidos user// para crear un archivo de usuarios y contraseñas
+    - para anadir mas usuarios debemos poner
+        - htpasswd /var/archivosrestringidos/restringidos user
+
+    - para apagar el servidor
+        - /etc/init.d/apache2 stop
+
 # Nginx
     - aptitude install nginx // para instalar nginx
+    - dpkg -s nginx // para ver si esta instalado
+    - ps aux | grep nginx // para ver el usuario y grupo que ejecuta nginx
+    - netstat -tulpn | grep nginx // para ver que puerto esta trabajando con nginx
+    - service nginx status // para ver el estado del servidor
     - ls -l /etc/nginx // para ver los archivos de configuracion de nginx
     - ls -l /etc/nginx/sites-available // para ver los sitios disponibles
     - para levantar el servidor
@@ -504,6 +524,23 @@ para cambiar los permisos de others usamos el comando:
         - rm /etc/nginx/sites-enabled/alpha.com // para eliminar el enlace simbolico
         - /etc/init.d/nginx restart // para reiniciar nginx
     
+## para hacer un reverse proxy
+    - nano /etc/nginx/sites-available/reverse-proxy.conf // para editar el archivo de configuracion
+    -   server {
+            listen 80;
+            server_name example.com; //cambialo por el dominio que quieras
+
+            location / {
+                proxy_pass http://localhost:3000; //cambiala ip y el puerto que quieras
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header Host $http_host;
+                proxy_set_header X-NginX-Proxy true;
+            }
+        }
+    - ln -s /etc/nginx/sites-available/reverse-proxy.conf /etc/nginx/sites-enabled/ // para crear un enlace simbolico
+    - /etc/init.d/nginx restart // para reiniciar nginx
+
 ## Ahora haremos otra nueva pagina pero con el nombre beta.com y en el puerto 8585
     - mkdir /var/www/beta.com // para crear un directorio
     - nano /var/www/beta.com/index.html // para crear un archivo html
@@ -555,6 +592,14 @@ para cambiar los permisos de others usamos el comando:
         - anadimos las siguientes lineas
             - include /etc/nginx/conf.d/*.conf;
             - include /etc/nginx/sites-enabled/*;
+
+## NFS
+    - aptitude install nfs-kernel-server // para instalar nfs
+    - en el cliente
+        - aptitude install nfs-common // para instalar nfs
+    - en el servidor
+        - mkdir /mnt/nfs // para crear un directorio
+        - 
 
 ## samba
     Que es xamba
@@ -633,9 +678,37 @@ para cambiar los permisos de others usamos el comando:
     - editamos las lineas 
         - UseIPv6 off
         - DefaultRoot   /home/user user // para que el usuario no pueda salir de su directorio
+        donde /home/user es el directorio del usuario y user es el usuario
     - reiniciamos proftpd
         - /etc/init.d/proftpd restart
-    
+    - ahora si queremos encriptar debemos hacer lo siguiente
+        - aptitude install openssl // para instalar openssl
+        - openssl req -new -x509 -days 365 -nodes -out /etc/ssl/certs/proftpd.cert.pem -keyout /etc/ssl/private/proftpd.key.pem // para crear un certificado
+        - nano /etc/proftpd/proftpd.conf // para editar el archivo de configuracion
+        - anadimos las siguientes lineas
+            - <IfModule mod_tls.c>
+                TLSEngine on
+                TLSLog /var/log/proftpd/tls.log
+                TLSProtocol SSLv23
+                TLSRSACertificateFile /etc/ssl/certs/proftpd.cert.pem
+                TLSRSACertificateKeyFile /etc/ssl/private/proftpd.key.pem
+                TLSOptions NoCertRequest AllowClientRenegotiations
+                TLSVerifyClient off
+                TLSRequired off
+                <IfModule mod_sftp.c>
+                    SFTPEngine on
+                    SFTPLog /var/log/proftpd/sftp.log
+                </IfModule>
+            </IfModule>
+        - /etc/init.d/proftpd restart // para reiniciar proftpd
+
+    - ahora debemos modificar el archivo de modulos
+        - nano /etc/proftpd/modules.conf // para editar el archivo de configuracion
+        - anadimos las siguientes lineas
+            - LoadModule mod_tls.c
+            - LoadModule mod_sftp.c
+        - /etc/init.d/proftpd restart // para reiniciar proftpd
+
     - vamos a crear un usuario anonimo
         - cat /etc/passwd // para ver los usuarios
         - mkdir /home/anonimo // para crear un directorio
