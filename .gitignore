@@ -1,0 +1,11 @@
+# ignorar la carpeta de documentos
+
+documentos/
+
+#ignorar los archivos que terminen en asc
+
+*.asc
+
+#ignorar el archivo EXAMEN PRELIMINAR.md
+
+EXAMEN PRELIMINAR.md
