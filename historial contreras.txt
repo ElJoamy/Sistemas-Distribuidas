@@ -1,0 +1,88 @@
+10  aptitude search net-tools
+   11  aptitude install  net-tools
+   12  ifconfig
+   13  telinit 0
+   14  cat /home/user/Documentos/repositorios.txt
+   15  nano -c /etc/apt/sources.list
+   16  apt-get update
+   17  apt-get upgrade
+   18  ip addr
+   19  nano /etc/network/interfaces
+   20  /etc/init.d/networking restart
+   21  ip addr
+   22  service NetworkManager stop
+   23  ip addr
+   24  ip addr flush ens33
+   25  lsblk
+   26  blkid
+   27  ifconfig
+   28  ifconfig
+   29  route -n
+   30  cat /etc/passwd
+   31  cat /etc/passwd
+   32  cat /etc/shadow
+   33  useradd user100
+   34  adduser user200
+   35  passwd user100
+   36  cat /etc/passwd
+   37  ls
+   38  ls /home/
+   39  ls -l
+   40  ls -l /home/
+   41  cd /home/
+   42  mkdir data
+   43  mkdir usuarios
+   44  ls -l data/
+   45  touch data/archivo1
+   46  cp /etc/shadow /home/data/usuarios
+   47  echo "algo" >> data/info
+   48  cat data/info
+   49  nano data/camijoma
+   50  cat "hola mundo.." >> data/mundo
+   51  ls data/
+   52  cd data/
+   53  ls -l
+   54  chmod 777 archivo1
+   55  ls -l
+   56  chmod rwx camijoma
+   57  chmod rwxrwxrwx camijoma
+   58  chmod a+rwx camijoma
+   59  ls -l
+   60  chmod u=x,g=rx,o=r
+   61  chmod u=x,g=rx,o=r usuarios
+   62  chmod o=r,g=rw mundo
+   63  ls -l
+   64  ls -l ho
+   65  ls -l /home/
+   66  ls
+   67  ls -l
+   68  chown user100 info
+   69  ls -l
+   70  chown user100:user100 info
+   71  ls -l
+   72  chgrp  user200 mundo
+   73  ls -l
+   74  chgrp user100:user100 usuarios
+   75  lsblk
+   76  cat /etc/fstab
+   77  lsscsi
+   78  blkid
+   79  lsblk -fm
+   80  lmnt
+   81  ls /mnt/
+   82  mount
+   83  mount -l
+   84  mount -l
+   85  cat /etc/fstab
+   86  mount -l
+   87  fdisk -l
+   88  fdisk /dev/sdb
+   89  fdisk -l
+   90  mkfs.ext4 /dev/sdb1
+   91  mkdir /mnt/discode7gb
+   92  mount /dev/sdb1 /mnt/discode7gb/
+   93  ls -l /mnt/discode7gb/
+   94  mount
+   95  lsblk
+   96  df -h
+   97  history
