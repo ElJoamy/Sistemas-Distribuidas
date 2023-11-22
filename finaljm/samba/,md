@@ -1,0 +1,12 @@
+
+[final]
+comment = Compartido
+path = /home/joseph/final
+writable = yes
+read only = no
+browseable = yes
+guest ok = no
+guest only = no
+directory mode = 0777
+valid users = joseph
+

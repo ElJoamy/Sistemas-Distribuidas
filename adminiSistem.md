@@ -601,6 +601,122 @@ para cambiar los permisos de others usamos el comando:
         - mkdir /mnt/nfs // para crear un directorio
         - 
 
+## Docker
+    - check the site https://docs.docker.com/engine/install/debian/
+    - seguir los pasos de la pagina
+    - hasta el comando run hello-world
+    - docker run hello-world // para comprobar que funciona
+    - /etc/init.d/docker start // para iniciar docker
+    - check tis site https://hub.docker.com/search?q=debian // para buscar imagenes de debian en docker o cualquier otra imagen
+    - ahora tambien podemos ver imagenes oficiales con el comanddo
+        - docker search debian // para buscar imagenes de debian
+        - donde pone stars es la puntuacion que tiene la imagen
+    - si queremos descargar una imagen
+        - docker pull debian // para descargar la imagen de debian
+    - para ver las imagenes que tenemos
+        - docker images ls // para ver las imagenes que tenemos
+    - docker run -d -t --name nombre_alternativo nombre_de_la_imagen // para ejecutar una imagen, donde -d es para que se ejecute en segundo plano, -t es para que se ejecute en primer plano, --name es para ponerle un nombre alternativo a la imagen
+    - para ver los contenedores que tenemos
+        - docker ps // para ver los contenedores que tenemos en ejecucion
+        - docker ps -a // para ver todos los contenedores que tenemos en ejecucion y los que no
+    - para entrar en un contenedor
+        - docker exec -it nombre_del_contenedor bash // para entrar en un contenedor bash or /bin/bash
+    - para salir de un contenedor
+        - exit // para salir de un contenedor
+    - dentro del contenedor hacemos
+        - apt-get update && apt-get upgrade 
+        - apt-get install nano // para instalar nano
+        - apt-get install aptitude // para instalar aptitude
+        - aptitude install net-tools // para instalar net-tools
+        - aptitude install iputils-ping // para instalar iputils-ping
+        - docker pull nginx // para descargar la imagen de nginx
+        - docker images ls // para ver las imagenes que tenemos
+        - para cambiar el hostname en un contenedor
+            - hostnamectl set-hostname nombre_del_host // para cambiar el hostname
+            - para cambiar deesde fuera del contenedor el hostname
+                - ls /var/lib/docker/containers // para ver los contenedores que tenemos
+                - ls /var/lib/docker/containers/ID_del_contenedor // para ver el id del contenedor
+                - nano /var/lib/docker/containers/ID_del_contenedor/config.v2.json // para editar el archivo de configuracion
+                - buscamos la linea "Hostname": "ID_del_contenedor" y la cambiamos por "Hostname": "nombre_del_host"
+                - reiniciamos el contenedor
+                    - docker restart nombre_del_contenedor // para reiniciar el contenedor
+                    - o tambien se puede usar el siguiente comando
+                    - /etc/init.d/docker restart // para reiniciar docker
+
+                    
+    - fuera de los contenedores 
+        - docker stats // para ver los contenedores que tenemos y su estado
+        - docker container rm nombre_del_contenedor // para borrar un contenedor
+        - docker image ls // para ver las imagenes que tenemos
+        - docker run -t -d -p80:80 --name server nginx // para ejecutar un contenedor con el nombre server y con el puerto 80
+        - docker network inspect // para ver las redes que tenemos en docker
+        - docker network create --driver bridge nombre_de_la_red // para crear una red
+        - docker network create --driver bridge --subnet=192.168.50.0/24 --ip-range=192.168.50.0/24 --gateway=192.168.50.1 nombre_de_la_red // para crear una red con una ip
+        - docker network ls // para ver las redes que tenemos
+        - para crear un contenedor y ponerle con una red
+            - docker run -t -d --name server --network nombre_de_la_red nginx // para crear un contenedor y ponerle con una red
+            - otra seria 
+            - docker conect nombre_de_la_red nombre_del_contenedor // para conectar un contenedor a una red
+            - docker run -itd --network nombre_de_la_red --name nombre_del_contenedor nombre_de_la_imagen // para crear un contenedor y ponerle con una red
+        - docker network inspect bridge // para ver la red bridge
+
+    - macvlan
+        - ESTO CON NUESTRA RED DE VM LA RED DE ACONTIUACION ES EJEMPLO
+        - docker network create -d macvlan \
+        --subnet=192.168.1.0/24 \
+        --gateway=192.168.1.1 \
+        -o parent=ens33 \
+        casa
+
+        - docker run -itd --network casa --ip 192.168.1.53 --name servernginx nginx // para crear un contenedor y ponerle con una red
+        - docker exec -it servernginx bash // para entrar en el contenedor
+        
+    ## Uptime Kuma
+        - que es uptime kuma
+            - es un servicio para ver el estado de los contenedores
+        - docker run -d --restart=always -p 3001:3001 -v uptime-kuma:/app/data --name uptime-kuma louislam/uptime-kuma:1
+        - docker ps // para ver los contenedores que tenemos
+        - el puerto del contenedor es el 3001
+        - para ver el estado de los contenedores
+            - 192.168.207.52:3001 // para ver el estado de los contenedores
+            - escogemos lenguaje
+            - creamos un usuario
+            - add new monitor de tipo ping
+                - monnitor type: Ping
+                - friendly name: ucb
+                - hostname: ucb.edu.bo
+                - heartbeat interval: 30
+                - retry interval: 3
+                - listo
+
+            - add new monitor de monitereo de paginas web
+                - monnitor type: HTTP(s)
+                - friendly name: upb
+                - url: https://www.upb.edu
+                - heartbeat interval: 30
+                - retry interval: 3
+                - advanced
+                    - check the option "ignore SSL errors" and certificate expiry notificatios
+                - listo
+
+            - add new monitor de tipo http - keyword
+                - monnitor type: HTTP(s) - Keyword
+                - friendly name:palabra ucb
+                - url: https://www.upb.edu
+                - keyword: PREGRADO
+                - heartbeat interval: 30
+                - retry interval: 2
+                - listo
+
+        - si queremos las notificaciones en un telegram nos entramos a settings y notificaciones
+        - setup notifications
+        - telegram
+        - friendly name: nombre del bot
+        - hagarramos un token de un bot de telegram
+        - chat id: ponemos el id del chat
+        - listo
+
+
 ## samba
     Que es xamba
         - es un servicio para compartir archivos en windows, linux y mac
@@ -783,6 +899,9 @@ para cambiar los permisos de others usamos el comando:
         todos los permisos
         chmod 777 /mnt/administracion
 
+    ## Para conectarnos desde windows usando solo la ip del servidor
+        - en el explorador de windows
+            - \\ip_del_servidor
 
 ## Proxy
     - que es un proxy server?
@@ -1034,7 +1153,7 @@ para cambiar los permisos de others usamos el comando:
         @       IN      NS      adminSistem2.juas.com.
         adminSistem.juas.com.   IN      A       192.168.207.100
         adminSistem2.juas.com.   IN      A       192.168.207.200
-        ftp     IN      A   192.168.207.200
+        ftp     IN      A   192.168.207.200 // donde ftp es el nombre del servidor ftp
         www     IN      CNAME   adminSistem.juas.com.
 
     - nano -c /var/lib/bind/207.168.192.zone // para editar el archivo de configuracion de la zona indirecta

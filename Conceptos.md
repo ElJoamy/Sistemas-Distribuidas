@@ -246,11 +246,14 @@
         - O no se consigue en el tiempoen el que se deberia poder hacer 
     - Fallos arbitrarios
         - Errores de cualquier tipo, fuera del esquema de mensaes
-    
+    - 
 ## como funciona una llave asimetrica?
     - la llave publica es la que se usa para cifrar y la privada para descifrar, y funciona de la siguiente manera:
         - el que cifra usa la llave publica del que descifra
         - el que descifra usa la llave privada del que cifra
+## como funcionan las llaves simetricas?
+    - las llaves simetricas son las que se usan para cifrar y descifrar, y funciona de la siguiente manera:
+        - el que cifra y el que descifra usan la misma llave
 
 ## que es DNS?
     - DNS es el sistema de nombres de dominio que se utiliza para traducir los nombres de dominio en direcciones IP. DNS es el sistema de nombres de dominio que se utiliza para traducir los nombres de dominio en direcciones IP. 
